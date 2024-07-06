@@ -1,7 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:task_manager_app/data/model/network_response.dart';
-import 'package:task_manager_app/data/model/user_model.dart';
 import 'package:task_manager_app/data/network_caller/network_caller.dart';
 import 'package:task_manager_app/data/utilities/urls.dart';
 import 'package:task_manager_app/ui/controller/auth_controller.dart';
