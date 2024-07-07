@@ -81,7 +81,10 @@ class _NewTaskScreenState extends State<NewTaskScreen> {
         backgroundColor: AppColors.themeColor,
         foregroundColor: AppColors.white,
         onPressed: _onTapAddButton,
-        child: const Icon(Icons.add),
+        child: const Icon(
+          Icons.add,
+          size: 40,
+        ),
       ),
     );
   }
@@ -128,7 +131,11 @@ class _NewTaskScreenState extends State<NewTaskScreen> {
       newTasks = taskListWrapperModel.taskList ?? [];
     } else {
       if (mounted) {
-        snackBarMessage(context, "Get new tasks faild. Try again!");
+        snackBarMessage(
+          context,
+          "Get new tasks failed. Try again!",
+          true,
+        );
       }
     }
 
@@ -154,7 +161,11 @@ class _NewTaskScreenState extends State<NewTaskScreen> {
           taskCountByStatusWrapperModel.taskCountByStatusList ?? [];
     } else {
       if (mounted) {
-        snackBarMessage(context, "Get new tasks faild. Try again!");
+        snackBarMessage(
+          context,
+          "Get tasks count failed. Try again!",
+          true,
+        );
       }
     }
 

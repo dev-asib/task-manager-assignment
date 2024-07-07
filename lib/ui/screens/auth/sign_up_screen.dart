@@ -133,7 +133,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     const SizedBox(height: 16),
                     Visibility(
                       visible: _registrationInProgress == false,
-                      replacement:const CenterdProgressIndicator(),
+                      replacement: const CenterdProgressIndicator(),
                       child: ElevatedButton(
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
@@ -177,12 +177,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
   }
 
   void registerUser() async {
-
     _registrationInProgress = true;
-    if(mounted){
+    if (mounted) {
       setState(() {});
     }
-
 
     Map<String, dynamic> requestInput = {
       "email": _emailTEController.text.trim(),
@@ -199,7 +197,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
     );
 
     _registrationInProgress = false;
-    if(mounted){
+    if (mounted) {
       setState(() {});
     }
 
@@ -213,13 +211,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
         snackBarMessage(
           context,
           response.errorMessage ?? "Registration failed, Try again",
+          true,
         );
       }
     }
   }
 
-
-  void _clearTextFields(){
+  void _clearTextFields() {
     _firstNameTEController.clear();
     _lastNameTEController.clear();
     _mobileEController.clear();

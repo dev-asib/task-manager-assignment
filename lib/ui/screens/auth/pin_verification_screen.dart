@@ -20,10 +20,8 @@ class PinVerificationScreen extends StatefulWidget {
 }
 
 class _PinVerificationScreenState extends State<PinVerificationScreen> {
-
   final TextEditingController _pinTEController = TextEditingController();
   bool _otpVerificationInProgress = false;
-
 
   @override
   Widget build(BuildContext context) {
@@ -125,7 +123,6 @@ class _PinVerificationScreenState extends State<PinVerificationScreen> {
   }
 
   Future<void> _otpVerification() async {
-
     String? email = await AuthController.getVerificationEmail();
 
     _otpVerificationInProgress = true;
@@ -140,7 +137,6 @@ class _PinVerificationScreenState extends State<PinVerificationScreen> {
       ),
     );
 
-
     if (response.isSuccess) {
       _onTapVerifyOTPButton();
       if (mounted) {
@@ -152,9 +148,10 @@ class _PinVerificationScreenState extends State<PinVerificationScreen> {
     } else {
       if (mounted) {
         snackBarMessage(
-            context,
-            response.errorMessage ?? "Pin pin verification failed. Try again!",
-            true);
+          context,
+          response.errorMessage ?? "Pin pin verification failed. Try again!",
+          true,
+        );
       }
     }
     _otpVerificationInProgress = false;
@@ -172,13 +169,9 @@ class _PinVerificationScreenState extends State<PinVerificationScreen> {
     );
   }
 
-  // @override
-  // void dispose() {
-  //   _pinTEController.dispose();
-  //   super.dispose();
-  // }
-
+// @override
+// void dispose() {
+//   _pinTEController.dispose();
+//   super.dispose();
+// }
 }
-
-
-

@@ -9,15 +9,14 @@ import 'package:task_manager_app/ui/widgets/centered_empty_lottie.dart';
 import 'package:task_manager_app/ui/widgets/snack_bar_message.dart';
 import 'package:task_manager_app/ui/widgets/task_item.dart';
 
-class InprogressTaskScreen extends StatefulWidget {
-  const InprogressTaskScreen({super.key});
+class InProgressTaskScreen extends StatefulWidget {
+  const InProgressTaskScreen({super.key});
 
   @override
-  State<InprogressTaskScreen> createState() => _InprogressTaskScreenState();
+  State<InProgressTaskScreen> createState() => _InProgressTaskScreenState();
 }
 
-class _InprogressTaskScreenState extends State<InprogressTaskScreen> {
-
+class _InProgressTaskScreenState extends State<InProgressTaskScreen> {
   bool _getInProgressTasksInProgress = false;
 
   List<TaskModel> inProgressTasks = [];
@@ -25,19 +24,18 @@ class _InprogressTaskScreenState extends State<InprogressTaskScreen> {
   @override
   void initState() {
     super.initState();
-    _getInprogressTasks();
+    _getInProgressTasks();
   }
-
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body:  Visibility(
+      body: Visibility(
         visible: inProgressTasks.isNotEmpty,
         replacement: const CenteredEmptyLottie(),
         child: RefreshIndicator(
-          onRefresh: () async{
-            _getInprogressTasks();
+          onRefresh: () async {
+            _getInProgressTasks();
           },
           child: Visibility(
             visible: _getInProgressTasksInProgress == false,
@@ -47,8 +45,8 @@ class _InprogressTaskScreenState extends State<InprogressTaskScreen> {
               itemBuilder: (context, index) {
                 return TaskItem(
                   taskModel: inProgressTasks[index],
-                  onUpdateTask: (){
-                    _getInprogressTasks();
+                  onUpdateTask: () {
+                    _getInProgressTasks();
                   },
                 );
               },
@@ -59,22 +57,26 @@ class _InprogressTaskScreenState extends State<InprogressTaskScreen> {
     );
   }
 
-  Future<void> _getInprogressTasks() async {
+  Future<void> _getInProgressTasks() async {
     _getInProgressTasksInProgress = true;
     if (mounted) {
       setState(() {});
     }
 
     final NetworkResponse response =
-    await NetworkCaller.getRequest(Urls.inProgressTasks);
+        await NetworkCaller.getRequest(Urls.inProgressTasks);
 
     if (response.isSuccess) {
       TaskListWrapperModel taskListWrapperModel =
-      TaskListWrapperModel.fromJson(response.reponseData);
+          TaskListWrapperModel.fromJson(response.reponseData);
       inProgressTasks = taskListWrapperModel.taskList ?? [];
     } else {
-      if(mounted){
-        snackBarMessage(context, "Get completed tasks faild. Try again!");
+      if (mounted) {
+        snackBarMessage(
+          context,
+          "Get completed tasks failed. Try again!",
+          true,
+        );
       }
     }
 
@@ -82,8 +84,5 @@ class _InprogressTaskScreenState extends State<InprogressTaskScreen> {
     if (mounted) {
       setState(() {});
     }
-
   }
-
-
 }

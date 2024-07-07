@@ -3,6 +3,7 @@ import 'package:task_manager_app/data/model/network_response.dart';
 import 'package:task_manager_app/data/model/task_model.dart';
 import 'package:task_manager_app/data/network_caller/network_caller.dart';
 import 'package:task_manager_app/data/utilities/urls.dart';
+import 'package:task_manager_app/ui/utility/app_colors.dart';
 import 'package:task_manager_app/ui/widgets/centered_progress_indicator.dart';
 import 'package:task_manager_app/ui/widgets/snack_bar_message.dart';
 
@@ -29,7 +30,7 @@ class _TaskItemState extends State<TaskItem> {
   List<String> statusList = [
     'New',
     'Completed',
-    'InProgress',
+    'Progress',
     'Cancelled',
   ];
 
@@ -45,28 +46,47 @@ class _TaskItemState extends State<TaskItem> {
       elevation: 0,
       color: Colors.white,
       child: ListTile(
+        tileColor: Colors.green.shade50,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
         title: Text(
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            widget.taskModel.title ?? ''),
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+          widget.taskModel.title ?? '',
+          style: const TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 20,
+              color: AppColors.themeColor),
+        ),
         subtitle: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                widget.taskModel.description ?? ''),
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              widget.taskModel.description ?? '',
+              style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 15,
+                  color: AppColors.themeColor),
+            ),
             Text(
               "Date: ${widget.taskModel.createdDate}",
               style: const TextStyle(
-                fontWeight: FontWeight.bold,
-              ),
+                  fontWeight: FontWeight.bold,
+                  fontSize: 15,
+                  color: Colors.deepOrangeAccent),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Chip(
-                  label: Text(widget.taskModel.status ?? 'New'),
+                  backgroundColor: Colors.green,
+                  label: Text(
+                    widget.taskModel.status ?? 'New',
+                    style: const TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(16),
                   ),
@@ -84,7 +104,7 @@ class _TaskItemState extends State<TaskItem> {
                         },
                         icon: const Icon(
                           Icons.delete,
-                          color: Colors.red,
+                          color: Colors.deepOrangeAccent,
                         ),
                       ),
                     ),
@@ -97,9 +117,7 @@ class _TaskItemState extends State<TaskItem> {
                         initialValue: dropDownValue,
                         onSelected: (String selectedValue) {
                           dropDownValue = selectedValue;
-                          _updateTaskstatus(
-                            dropDownValue
-                          );
+                          _updateTaskstatus(dropDownValue);
                           if (mounted) {
                             setState(() {});
                           }
@@ -108,11 +126,25 @@ class _TaskItemState extends State<TaskItem> {
                           return statusList.map((String value) {
                             return PopupMenuItem<String>(
                               value: value,
-                              child: ListTile(
-                                title: Text(value),
-                                trailing: dropDownValue == value
-                                    ? const Icon(Icons.done)
-                                    : null,
+                              child: Card(
+                               shape: const RoundedRectangleBorder(borderRadius: BorderRadius.zero),
+                                color: AppColors.themeColor,
+                                child: ListTile(
+                                  contentPadding: const EdgeInsets.only(left: 8, right: 8),
+                                  title: Text(
+                                    value,
+                                    style: const TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  trailing: dropDownValue == value
+                                      ? const Icon(
+                                          Icons.done,
+                                          color: Colors.white,
+                                        )
+                                      : null,
+                                ),
                               ),
                             );
                           }).toList();

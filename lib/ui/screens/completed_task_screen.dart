@@ -17,7 +17,6 @@ class CompletedTaskScreen extends StatefulWidget {
 }
 
 class _CompletedTaskScreenState extends State<CompletedTaskScreen> {
-
   bool _getCompletedTasksInProgress = false;
 
   List<TaskModel> completedTasks = [];
@@ -31,11 +30,11 @@ class _CompletedTaskScreenState extends State<CompletedTaskScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body:  Visibility(
+      body: Visibility(
         visible: completedTasks.isNotEmpty,
         replacement: const CenteredEmptyLottie(),
         child: RefreshIndicator(
-          onRefresh: () async{
+          onRefresh: () async {
             _getCompletedTasks();
           },
           child: Visibility(
@@ -44,12 +43,12 @@ class _CompletedTaskScreenState extends State<CompletedTaskScreen> {
             child: ListView.builder(
               itemCount: completedTasks.length,
               itemBuilder: (context, index) {
-               return TaskItem(
-                 taskModel: completedTasks[index],
-                 onUpdateTask: (){
-                   _getCompletedTasks();
-                 },
-               );
+                return TaskItem(
+                  taskModel: completedTasks[index],
+                  onUpdateTask: () {
+                    _getCompletedTasks();
+                  },
+                );
               },
             ),
           ),
@@ -65,15 +64,19 @@ class _CompletedTaskScreenState extends State<CompletedTaskScreen> {
     }
 
     final NetworkResponse response =
-    await NetworkCaller.getRequest(Urls.completedTasks);
+        await NetworkCaller.getRequest(Urls.completedTasks);
 
     if (response.isSuccess) {
       TaskListWrapperModel taskListWrapperModel =
-      TaskListWrapperModel.fromJson(response.reponseData);
+          TaskListWrapperModel.fromJson(response.reponseData);
       completedTasks = taskListWrapperModel.taskList ?? [];
     } else {
-      if(mounted){
-        snackBarMessage(context, "Get completed tasks faild. Try again!");
+      if (mounted) {
+        snackBarMessage(
+          context,
+          "Get completed tasks failed. Try again!",
+          true,
+        );
       }
     }
 
@@ -81,8 +84,5 @@ class _CompletedTaskScreenState extends State<CompletedTaskScreen> {
     if (mounted) {
       setState(() {});
     }
-
   }
-
-
 }

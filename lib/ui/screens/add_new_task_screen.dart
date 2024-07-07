@@ -38,10 +38,11 @@ class _AddNewTaskScreenState extends State<AddNewTaskScreen> {
                   TextFormField(
                     controller: _titleTEController,
                     decoration: const InputDecoration(hintText: "Title"),
-                    validator: (String? value){
-                      if(value?.trim().isEmpty ?? true){
+                    validator: (String? value) {
+                      if (value?.trim().isEmpty ?? true) {
                         return "Enter title.";
-                      } return null;
+                      }
+                      return null;
                     },
                   ),
                   const SizedBox(
@@ -51,10 +52,11 @@ class _AddNewTaskScreenState extends State<AddNewTaskScreen> {
                     controller: _descriptionTEController,
                     maxLines: 4,
                     decoration: const InputDecoration(hintText: "Description"),
-                    validator: (String? value){
-                      if(value?.trim().isEmpty ?? true){
+                    validator: (String? value) {
+                      if (value?.trim().isEmpty ?? true) {
                         return "Enter description.";
-                      } return null;
+                      }
+                      return null;
                     },
                   ),
                   const SizedBox(
@@ -65,7 +67,7 @@ class _AddNewTaskScreenState extends State<AddNewTaskScreen> {
                     replacement: const CenterdProgressIndicator(),
                     child: ElevatedButton(
                       onPressed: () {
-                        if(_formKey.currentState!.validate()){
+                        if (_formKey.currentState!.validate()) {
                           _addNewTask();
                         }
                       },
@@ -81,39 +83,42 @@ class _AddNewTaskScreenState extends State<AddNewTaskScreen> {
     );
   }
 
-  Future<void> _addNewTask() async{
-
+  Future<void> _addNewTask() async {
     _addNewTaskInProgress = true;
-    if(mounted){
+    if (mounted) {
       setState(() {});
     }
 
     Map<String, dynamic> requestInput = {
-      "title":_titleTEController.text.trim(),
-      "description":_descriptionTEController.text.trim(),
-      "status":"New"
+      "title": _titleTEController.text.trim(),
+      "description": _descriptionTEController.text.trim(),
+      "status": "New"
     };
-    
-   final NetworkResponse response = await NetworkCaller.postRequest(Urls.createTask, body: requestInput);
+
+    final NetworkResponse response =
+        await NetworkCaller.postRequest(Urls.createTask, body: requestInput);
     _addNewTaskInProgress = false;
-    if(mounted){
+    if (mounted) {
       setState(() {});
     }
 
-    if(response.isSuccess){
+    if (response.isSuccess) {
       _clearTextFields();
-      if(mounted){
+      if (mounted) {
         snackBarMessage(context, "New task added");
       }
-    } else{
-      if(mounted){
-        snackBarMessage(context, "New task add failed. Try again!", true);
+    } else {
+      if (mounted) {
+        snackBarMessage(
+          context,
+          "New task add failed. Try again!",
+          true,
+        );
       }
     }
-
   }
 
-  void _clearTextFields(){
+  void _clearTextFields() {
     _titleTEController.clear();
     _descriptionTEController.clear();
   }

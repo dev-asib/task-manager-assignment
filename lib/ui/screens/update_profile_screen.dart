@@ -84,8 +84,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                         return "Enter your email";
                       }
 
-                      if (AppConstants.emailRegExp.hasMatch(value!) ==
-                          false) {
+                      if (AppConstants.emailRegExp.hasMatch(value!) == false) {
                         return "Enter a valid email address";
                       }
                       return null;
@@ -128,8 +127,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                       if (value?.trim().isEmpty ?? true) {
                         return "Enter your mobile number";
                       }
-                      if (AppConstants.mobileRegExp.hasMatch(value!) ==
-                          false) {
+                      if (AppConstants.mobileRegExp.hasMatch(value!) == false) {
                         return "Enter a valid mobile number";
                       }
                       return null;
@@ -142,7 +140,8 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                     controller: _passwordTEController,
                     keyboardType: TextInputType.visiblePassword,
                     obscureText: _showPassword == false,
-                    decoration: InputDecoration(hintText: "Password (Optional)",
+                    decoration: InputDecoration(
+                      hintText: "Password (Optional)",
                       suffixIcon: IconButton(
                         onPressed: () {
                           _showPassword = !_showPassword;
@@ -173,8 +172,8 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                     visible: _updateProfileInProgress == false,
                     replacement: const CenterdProgressIndicator(),
                     child: ElevatedButton(
-                      onPressed: (){
-                        if(_formKey.currentState!.validate()){
+                      onPressed: () {
+                        if (_formKey.currentState!.validate()) {
                           _updateProfile();
                         }
                       },
@@ -282,8 +281,11 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
       }
     } else {
       if (mounted) {
-        snackBarMessage(context,
-            response.errorMessage ?? "Profile update failed. Try again!");
+        snackBarMessage(
+          context,
+          response.errorMessage ?? "Profile update failed. Try again!",
+          true,
+        );
       }
     }
 

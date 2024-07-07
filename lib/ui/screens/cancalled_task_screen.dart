@@ -17,7 +17,6 @@ class CancelledTaskScreen extends StatefulWidget {
 }
 
 class _CancelledTaskScreenState extends State<CancelledTaskScreen> {
-
   bool _getCancelledTasksInProgress = false;
 
   List<TaskModel> cancelledTasks = [];
@@ -28,15 +27,14 @@ class _CancelledTaskScreenState extends State<CancelledTaskScreen> {
     _getCancelledTasks();
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body:  Visibility(
+      body: Visibility(
         visible: cancelledTasks.isNotEmpty,
         replacement: const CenteredEmptyLottie(),
         child: RefreshIndicator(
-          onRefresh: () async{
+          onRefresh: () async {
             _getCancelledTasks();
           },
           child: Visibility(
@@ -47,7 +45,7 @@ class _CancelledTaskScreenState extends State<CancelledTaskScreen> {
               itemBuilder: (context, index) {
                 return TaskItem(
                   taskModel: cancelledTasks[index],
-                  onUpdateTask: (){
+                  onUpdateTask: () {
                     _getCancelledTasks();
                   },
                 );
@@ -66,15 +64,19 @@ class _CancelledTaskScreenState extends State<CancelledTaskScreen> {
     }
 
     final NetworkResponse response =
-    await NetworkCaller.getRequest(Urls.cancelledTasks);
+        await NetworkCaller.getRequest(Urls.cancelledTasks);
 
     if (response.isSuccess) {
       TaskListWrapperModel taskListWrapperModel =
-      TaskListWrapperModel.fromJson(response.reponseData);
+          TaskListWrapperModel.fromJson(response.reponseData);
       cancelledTasks = taskListWrapperModel.taskList ?? [];
     } else {
-      if(mounted){
-        snackBarMessage(context, "Get completed tasks faild. Try again!");
+      if (mounted) {
+        snackBarMessage(
+          context,
+          "Get completed tasks failed. Try again!",
+          true,
+        );
       }
     }
 
@@ -82,8 +84,5 @@ class _CancelledTaskScreenState extends State<CancelledTaskScreen> {
     if (mounted) {
       setState(() {});
     }
-
   }
-
-
 }

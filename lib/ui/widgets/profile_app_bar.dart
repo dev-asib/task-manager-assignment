@@ -15,9 +15,11 @@ AppBar profileAppBar(context, [bool fromUpdateProfile = false]) {
         padding: const EdgeInsets.all(8),
         child: CircleAvatar(
           child: ClipRRect(
-              borderRadius: BorderRadius.circular(100),
-              child: Image.memory(
-                  base64Decode(AuthController.userData?.photo ?? ''))),
+            borderRadius: BorderRadius.circular(100),
+            child: Image.memory(
+              base64Decode(AuthController.userData?.photo ?? ''),
+            ),
+          ),
         ),
       ),
     ),

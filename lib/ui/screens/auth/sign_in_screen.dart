@@ -179,9 +179,10 @@ class _SignInScreenState extends State<SignInScreen> {
     } else {
       if (mounted) {
         snackBarMessage(
-            context,
-            response.errorMessage ??
-                "Email/Password is not correct. Try again");
+          context,
+          response.errorMessage ?? "Email/Password is not correct. Try again",
+          true,
+        );
       }
     }
   }
@@ -204,10 +205,10 @@ class _SignInScreenState extends State<SignInScreen> {
     );
   }
 
-  // @override
-  // void dispose() {
-  //   _emailTEController.dispose();
-  //   _passwordTEController.dispose();
-  //   super.dispose();
-  // }
+// @override
+// void dispose() {
+//   _emailTEController.dispose();
+//   _passwordTEController.dispose();
+//   super.dispose();
+// }
 }

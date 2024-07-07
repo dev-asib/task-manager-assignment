@@ -22,7 +22,7 @@ class _BottomNavMainScreenState extends State<BottomNavMainScreen> {
   List<Widget> screens = [
     const NewTaskScreen(),
     const CompletedTaskScreen(),
-    const InprogressTaskScreen(),
+    const InProgressTaskScreen(),
     const CancelledTaskScreen(),
   ];
 
@@ -48,8 +48,8 @@ class _BottomNavMainScreenState extends State<BottomNavMainScreen> {
           BottomNavigationBarItem(icon: Icon(Icons.task), label: 'New'),
           BottomNavigationBarItem(icon: Icon(Icons.done), label: 'Completed'),
           BottomNavigationBarItem(
-              icon: Icon(Icons.downloading), label: 'Inprogress'),
-          BottomNavigationBarItem(icon: Icon(Icons.cancel), label: 'Cancelled'),
+              icon: Icon(Icons.downloading), label: 'InProgress'),
+          BottomNavigationBarItem(icon: Icon(Icons.close_outlined), label: 'Cancelled'),
         ],
       ),
     );

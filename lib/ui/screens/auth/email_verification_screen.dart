@@ -135,6 +135,7 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
         snackBarMessage(
           context,
           response.errorMessage ?? "Email verification failed. Try again!",
+          true,
         );
       }
     }

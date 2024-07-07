@@ -22,13 +22,11 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
   final TextEditingController _confirmPasswordTEController =
       TextEditingController();
 
-  String matchPassword = '';
-
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   bool _showPassword = false;
   bool _showConfirmPassword = false;
-
   bool _resetPasswordInProgress = false;
+  String matchPassword = '';
 
   @override
   Widget build(BuildContext context) {
@@ -117,7 +115,16 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                       child: ElevatedButton(
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
-                            _resetPassword();
+                            if (_confirmPasswordTEController.text ==
+                                _passwordTEController.text) {
+                              _resetPassword();
+                            } else {
+                              snackBarMessage(
+                                context,
+                                "Password did't match. Try again!",
+                                true,
+                              );
+                            }
                           }
                         },
                         child: const Text("Confirm"),
@@ -154,13 +161,9 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
     );
   }
 
-
-
-
   Future<void> _resetPassword() async {
-
     _resetPasswordInProgress = true;
-    if(mounted){
+    if (mounted) {
       setState(() {});
     }
 
@@ -168,7 +171,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
     String? otp = await AuthController.getVerificationOTP();
 
     if (email == null || otp == null) {
-      if(mounted){
+      if (mounted) {
         snackBarMessage(
           context,
           "Verification data not found. Please try again.",
@@ -176,7 +179,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
         );
       }
       _resetPasswordInProgress = false;
-      if(mounted){
+      if (mounted) {
         setState(() {});
       }
       return;
@@ -194,7 +197,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
     );
 
     if (response.isSuccess) {
-      if(mounted){
+      if (mounted) {
         snackBarMessage(
           context,
           "Password successfully reset & updated",
@@ -202,23 +205,20 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
       }
       _onTapConfirmButton();
     } else {
-     if(mounted){
-       snackBarMessage(
-         context,
-         response.errorMessage ?? 'Password reset failed. Try again!',
-         true,
-       );
-     }
+      if (mounted) {
+        snackBarMessage(
+          context,
+          response.errorMessage ?? 'Password reset failed. Try again!',
+          true,
+        );
+      }
     }
 
     _resetPasswordInProgress = false;
-    if(mounted){
+    if (mounted) {
       setState(() {});
     }
-
   }
-
-
 
   void _onTapSingInButton() {
     Navigator.pushAndRemoveUntil(
@@ -240,10 +240,10 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
     );
   }
 
-  // @override
-  // void dispose() {
-  //   _passwordTEController.dispose();
-  //   _confirmPasswordTEController.dispose();
-  //   super.dispose();
-  // }
+// @override
+// void dispose() {
+//   _passwordTEController.dispose();
+//   _confirmPasswordTEController.dispose();
+//   super.dispose();
+// }
 }
