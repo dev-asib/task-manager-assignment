@@ -11,7 +11,6 @@ class BottomNavMainScreen extends StatefulWidget {
     super.key,
   });
 
-
   @override
   State<BottomNavMainScreen> createState() => _BottomNavMainScreenState();
 }
@@ -25,8 +24,6 @@ class _BottomNavMainScreenState extends State<BottomNavMainScreen> {
     const InProgressTaskScreen(),
     const CancelledTaskScreen(),
   ];
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -45,11 +42,22 @@ class _BottomNavMainScreenState extends State<BottomNavMainScreen> {
           }
         },
         items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.task), label: 'New'),
-          BottomNavigationBarItem(icon: Icon(Icons.done), label: 'Completed'),
           BottomNavigationBarItem(
-              icon: Icon(Icons.downloading), label: 'InProgress'),
-          BottomNavigationBarItem(icon: Icon(Icons.close_outlined), label: 'Cancelled'),
+            icon: Icon(Icons.task),
+            label: 'New',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.done),
+            label: 'Completed',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.downloading),
+            label: 'InProgress',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.close_outlined),
+            label: 'Cancelled',
+          ),
         ],
       ),
     );

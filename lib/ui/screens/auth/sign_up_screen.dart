@@ -203,6 +203,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
     if (response.isSuccess) {
       _clearTextFields();
+      _onTapSingInButton();
       if (mounted) {
         snackBarMessage(context, "Registration Success");
       }

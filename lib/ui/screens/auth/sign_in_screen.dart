@@ -188,7 +188,7 @@ class _SignInScreenState extends State<SignInScreen> {
   }
 
   void _onTapSingUpButton() {
-    Navigator.pushReplacement(
+    Navigator.push(
       context,
       MaterialPageRoute(
         builder: (context) => const SignUpScreen(),
