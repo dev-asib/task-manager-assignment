@@ -32,7 +32,9 @@ class _InProgressTaskScreenState extends State<InProgressTaskScreen> {
     return Scaffold(
       body: Visibility(
         visible: inProgressTasks.isNotEmpty,
-        replacement: const CenteredEmptyLottie(),
+        replacement: const SingleChildScrollView(
+          child: CenteredEmptyLottie(),
+        ),
         child: RefreshIndicator(
           onRefresh: () async {
             _getInProgressTasks();

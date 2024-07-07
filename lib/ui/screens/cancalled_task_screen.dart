@@ -32,7 +32,9 @@ class _CancelledTaskScreenState extends State<CancelledTaskScreen> {
     return Scaffold(
       body: Visibility(
         visible: cancelledTasks.isNotEmpty,
-        replacement: const CenteredEmptyLottie(),
+        replacement: const SingleChildScrollView(
+          child: CenteredEmptyLottie(),
+        ),
         child: RefreshIndicator(
           onRefresh: () async {
             _getCancelledTasks();

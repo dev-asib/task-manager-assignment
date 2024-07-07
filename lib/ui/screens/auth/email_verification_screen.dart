@@ -124,6 +124,7 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
     }
 
     if (response.isSuccess) {
+
       _onTapConfirmButton();
 
       await AuthController.saveVerificationEmail(

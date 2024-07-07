@@ -57,7 +57,9 @@ class _NewTaskScreenState extends State<NewTaskScreen> {
                   replacement: const CenterdProgressIndicator(),
                   child: Visibility(
                     visible: newTasks.isNotEmpty,
-                    replacement: const CenteredEmptyLottie(),
+                    replacement: const SingleChildScrollView(
+                      child: CenteredEmptyLottie(),
+                    ),
                     child: ListView.builder(
                       itemCount: newTasks.length,
                       itemBuilder: (context, index) {

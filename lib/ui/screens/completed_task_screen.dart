@@ -32,7 +32,9 @@ class _CompletedTaskScreenState extends State<CompletedTaskScreen> {
     return Scaffold(
       body: Visibility(
         visible: completedTasks.isNotEmpty,
-        replacement: const CenteredEmptyLottie(),
+        replacement: const SingleChildScrollView(
+          child: CenteredEmptyLottie(),
+        ),
         child: RefreshIndicator(
           onRefresh: () async {
             _getCompletedTasks();
