@@ -220,50 +220,6 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
 
 
 
-
-  // Future<void> _resetPassword() async {
-  //   _resetPasswordInProgress = true;
-  //   if (mounted) {
-  //     setState(() {});
-  //   }
-  //
-  //   Map<String, dynamic> requestInput = {
-  //     "email": AuthController.getVerificationEmail(),
-  //     "OTP": AuthController.getVerificationOTP(),
-  //     "password": matchPassword
-  //   };
-  //
-  //
-  //
-  //   final NetworkResponse response = await NetworkCaller.postRequest(
-  //     Urls.recoverResetPass,
-  //     body: requestInput,
-  //   );
-  //
-  //   if (response.isSuccess) {
-  //     _onTapConfirmButton();
-  //     if (mounted) {
-  //       snackBarMessage(
-  //         context,
-  //         "Password successfully reset & updated",
-  //       );
-  //     }
-  //   } else {
-  //     if (mounted) {
-  //       snackBarMessage(
-  //         context,
-  //         response.errorMessage ?? 'Password hasn\'t reset. Try again!',
-  //         true,
-  //       );
-  //     }
-  //   }
-  //
-  //   _resetPasswordInProgress = false;
-  //   if (mounted) {
-  //     setState(() {});
-  //   }
-  // }
-
   void _onTapSingInButton() {
     Navigator.pushAndRemoveUntil(
       context,
@@ -284,10 +240,10 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
     );
   }
 
-  @override
-  void dispose() {
-    _passwordTEController.dispose();
-    _confirmPasswordTEController.dispose();
-    super.dispose();
-  }
+  // @override
+  // void dispose() {
+  //   _passwordTEController.dispose();
+  //   _confirmPasswordTEController.dispose();
+  //   super.dispose();
+  // }
 }

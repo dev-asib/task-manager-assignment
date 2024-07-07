@@ -20,9 +20,9 @@ class PinVerificationScreen extends StatefulWidget {
 }
 
 class _PinVerificationScreenState extends State<PinVerificationScreen> {
+
   final TextEditingController _pinTEController = TextEditingController();
   bool _otpVerificationInProgress = false;
-
 
 
   @override
@@ -172,10 +172,13 @@ class _PinVerificationScreenState extends State<PinVerificationScreen> {
     );
   }
 
-  @override
-  void dispose() {
-    _pinTEController.dispose();
-    super.dispose();
-  }
+  // @override
+  // void dispose() {
+  //   _pinTEController.dispose();
+  //   super.dispose();
+  // }
 
 }
+
+
+

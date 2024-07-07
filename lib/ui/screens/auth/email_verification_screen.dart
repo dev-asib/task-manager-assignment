@@ -148,10 +148,10 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
     Navigator.push(context,
         MaterialPageRoute(builder: (context) => const PinVerificationScreen()));
   }
-
-  @override
-  void dispose() {
-    _emailTEController.dispose();
-    super.dispose();
-  }
+  //
+  // @override
+  // void dispose() {
+  //   _emailTEController.dispose();
+  //   super.dispose();
+  // }
 }

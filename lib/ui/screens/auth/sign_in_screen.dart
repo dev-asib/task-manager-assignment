@@ -162,13 +162,12 @@ class _SignInScreenState extends State<SignInScreen> {
     }
 
     if (response.isSuccess) {
-
       LoginModel loginModel = LoginModel.fromJson(response.reponseData);
       await AuthController.saveUserAccessToken(loginModel.token!);
       await AuthController.saveUserData(loginModel.userModel!);
 
       if (_formKey.currentState!.validate()) {
-        if(mounted){
+        if (mounted) {
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(
@@ -186,7 +185,6 @@ class _SignInScreenState extends State<SignInScreen> {
       }
     }
   }
-
 
   void _onTapSingUpButton() {
     Navigator.pushReplacement(
@@ -206,10 +204,10 @@ class _SignInScreenState extends State<SignInScreen> {
     );
   }
 
-  @override
-  void dispose() {
-    _emailTEController.dispose();
-    _passwordTEController.dispose();
-    super.dispose();
-  }
+  // @override
+  // void dispose() {
+  //   _emailTEController.dispose();
+  //   _passwordTEController.dispose();
+  //   super.dispose();
+  // }
 }
